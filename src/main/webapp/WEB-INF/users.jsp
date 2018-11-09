@@ -14,22 +14,43 @@
 
 	<h1> ${ user } </h1>
 
-	<c:forEach var="user" items="${ users }" >
-		<h1>Id: ${ user.id }</h1>
-		<h1>Name: ${ user.name }</h1>
-		<h1>Email: ${ user.email }</h1>
-	</c:forEach>
+	<hr>
+
+	<h1>Register</h1>
 
     <form:form method="POST" action="/users" modelAttribute="user" >
-		<form:label path="name" >Name:</form:label>
-		<form:errors path="name" ></form:errors>
-		<form:input path="name" ></form:input>
+    	<c:if test="${ exists != null}">
+    		<p>${ exists }</p>
+    	</c:if>
+    	<c:if test="${ regError != null}">
+    		<p>${ regError }</p>
+    	</c:if>    
+    	
+		<p><form:label path="email" >Email:</form:label></p>
+		<p><form:errors path="email" ></form:errors></p>
+		<p><form:input path="email" ></form:input>	</p>				
 		
-		<form:label path="email" >Email:</form:label>
-		<form:errors path="email" ></form:errors>
-		<form:input path="email" ></form:input>	
+		<p><form:label path="name" >Name:</form:label></p>
+		<p><form:errors path="name" ></form:errors></p>
+		<p><form:input path="name" ></form:input></p>
 		
-		<input type="submit" value="Register" />	
+		<p><form:label path="password" >Password:</form:label></p>
+		<p><form:errors path="password" ></form:errors></p>
+		<p><form:input path="password" ></form:input></p>	
+		
+		<p><form:label path="confirm" >Password Confirmation:</form:label></p>
+		<p><form:errors path="confirm" ></form:errors></p>
+		<p><form:input path="confirm" ></form:input></p>
+		
+		<input type="submit" value="Update" />	
     </form:form>
+    
+	<h1>Login</h1>
+    
+    <form action="/users/login" method="POST">
+		<input name="email" placeholder="Email" />
+		<input name="password" placeholder="Password" />
+    	<input type="submit" value="Login" />
+    </form>
 </body>
 </html>

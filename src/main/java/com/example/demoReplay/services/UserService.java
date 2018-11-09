@@ -1,6 +1,7 @@
 package com.example.demoReplay.services;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,9 @@ public class UserService{
 	}
 	
 	public User findById(Long id) {
-		return userRepository.findById(id).get();
+		Optional<User> user = userRepository.findById(id);
+		if( user.isPresent() ) return user.get();
+		return null;
 	}
 	
 	public User findByEmail( String email ) {
@@ -38,5 +41,9 @@ public class UserService{
 	
 	public void destroy( User user ) {
 		userRepository.delete( user );
+	}
+	
+	public void destroy(Long id) {
+		userRepository.deleteById(id);
 	}
 }
